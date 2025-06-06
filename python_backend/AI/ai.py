@@ -14,7 +14,14 @@ os.environ['OPENAI_API_KEY'] = os.getenv('OPENAI_API_KEY', openaikey)
 gpt = OpenAI()
 
 system_message = "Identify what the following image is and state whether it should go to landfill, recycle, compost, or hazardous other: https://www.fromvalerieskitchen.com/wordpress/wp-content/uploads/2022/05/Pizza-crust-078.jpg. If landfill, provide a list of some sustainable alternatives. If hazardous, provide a list of some specific disposal sites."
-user_prompt = "You are part of a waste sustainability app that analyzes photos. Be concise and precise; stick to brief, single-word labels when possible. Respon in json format."
+user_prompt = """
+You are part of a waste sustainability app that analyzes photos. Respond in JSON format.
+The JSON format must be: {
+    "item": <item>
+    "disposal": <type of disposal>,
+    "details": <details about the object>
+}
+"""
 
 prompts = [
     {"role": "system", "content": system_message},
