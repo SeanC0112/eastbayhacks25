@@ -9,10 +9,9 @@ import os
 
 from openai import OpenAI
 
-from ai.apikeys import openaikey
+from ai.apikeys import openaikey_W, openaikey_A, openaikey_S
 
-os.environ['OPENAI_API_KEY'] = os.getenv('OPENAI_API_KEY', openaikey)
-
+os.environ['OPENAI_API_KEY'] = os.getenv('OPENAI_API_KEY', openaikey_W
 gpt = OpenAI()
 
 
