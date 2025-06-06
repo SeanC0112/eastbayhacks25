@@ -100,7 +100,7 @@ const App = () => {
             }}>
                 <Upload />
                 <ResponseBox />
-                <Map />
+                {/* <Map /> */}
             </div>
 
             {/* Bottom Wave (at exact bottom) */}

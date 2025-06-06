@@ -57,6 +57,14 @@ const ResponseBox = () => {
                 minHeight: 40
             }}>
                 {!data && ("Waiting for upload...")}
+                {data && (
+                    <div>
+                        <h1 style={{ color: "#1976d2", marginBottom: 16, fontWeight: 700, fontSize: 20 }}>Item: {data.item}</h1>
+                        <h1 style={{ color: "#1976d2", marginBottom: 16, fontWeight: 700, fontSize: 20 }}>Disposal: {data.disposal}</h1>
+                        <p style={{ marginBottom: 16 }}>{data.details}</p>
+                        
+                    </div>
+                )}
             </div>
         </div>
     );
