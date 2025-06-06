@@ -1,5 +1,8 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+from .AI import ai  # Assuming ai.py is in the same directory as this script
+
+image = None
 
 app = Flask(__name__)
 CORS(app)
@@ -20,8 +23,9 @@ def upload_image():
     
     # Here you would typically save the file to a directory or process it
     # For this example, we will just return a success message
-    return jsonify({"message": "File uploaded successfully", "filename": file.filename}), 200@app.route('/api/chatgpt', methods=['GET'])
+    return jsonify({"message": "File uploaded successfully", "filename": file.filename}), 200
 
+@app.route('/api/chatgpt', methods=['GET'])
 def chatgpt():
     return jsonify({
         "can_be_recycled": "yes",
