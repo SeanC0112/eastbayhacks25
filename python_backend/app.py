@@ -21,6 +21,17 @@ CORS(app)
 def get_data():
     return jsonify({"message": "Hello from Python!"})
 
+@app.route('/api/image/check', methods=['GET'])
+def check_image():
+    global image
+    print("Received request to check image.")
+    
+    if image is None:
+        print("No image uploaded yet.")
+        return jsonify({"updated": "false"}), 400
+    else:
+        return jsonify({"updated": "true"}), 200
+
 
 @app.route('/api/image/upload', methods=['POST'])
 def upload_image():

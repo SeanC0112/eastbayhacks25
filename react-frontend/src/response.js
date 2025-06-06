@@ -4,7 +4,7 @@ import axios from 'axios';
 const ResponseBox = () => {
     const [data, setData] = useState(null);
 
-    useEffect(() => {
+    const chatGpt = () => {
         axios.get('http://127.0.0.1:5000/api/chatgpt')
             .then(response => {
                 setData(response.data);
@@ -12,6 +12,24 @@ const ResponseBox = () => {
             .catch(error => {
                 console.error('Error fetching data:', error);
             });
+    };
+    const checkForUpdates = async () => {
+        try {
+            const response = await axios.get('http://127.0.0.1:5000/api/image/check');
+            if (response.data.updated == "true") {
+                chatGpt();
+            }
+
+        } catch (error) {
+            console.error('Error checking for updates:', error);
+        }
+    }
+    useEffect(() => {
+        const interval = setInterval(() => {
+            checkForUpdates();
+        }, 5000); // Check every 5 seconds
+
+        return () => clearInterval(interval); // Cleanup on unmount
     }, []);
 
     return (
@@ -38,7 +56,7 @@ const ResponseBox = () => {
                 fontSize: 18,
                 minHeight: 40
             }}>
-                {data ? data : "Waiting for upload..."}
+                {!data && ("Waiting for upload...")}
             </div>
         </div>
     );
