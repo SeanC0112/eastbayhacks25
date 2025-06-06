@@ -3,8 +3,8 @@ import ast
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 
-import AI.main
-import AI.apikeys
+import ai.main
+import ai.apikeys
 
 image = None
 print("Starting Python backend...")
@@ -44,7 +44,7 @@ def upload_image():
 
 @app.route('/api/chatgpt', methods=['GET'])
 def chatgpt():
-    data = ast.literal_eval(AI.main.call_gpt(AI.main.prompts))
+    data = ast.literal_eval(ai.main.call_gpt(ai.main.prompts))
     data['where'] = {
         "street_address": '1290 Parkmoor Ave',
         "city": "San Jose",

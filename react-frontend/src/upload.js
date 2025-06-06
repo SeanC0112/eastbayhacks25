@@ -17,6 +17,7 @@ const Upload = () => {
         },
       });
       setUploaded(true);
+      setUploadedUrl('http://127.0.0.1:5050' + response.data.url);
       console.log('Image uploaded successfully:', response.data);
     } catch (error) {
       console.error('Error uploading image:', error);
@@ -25,15 +26,25 @@ const Upload = () => {
 
   return (
     <div style={{
-      maxWidth: 350,
-      margin: "40px auto",
-      padding: 24,
-      borderRadius: 12,
-      boxShadow: "0 2px 16px rgba(0,0,0,0.08)",
+      maxWidth: 400,
+      minWidth: 320,
+      margin: "0 auto",
+      padding: 32,
+      borderRadius: 18,
+      boxShadow: "0 4px 24px rgba(25,118,210,0.10)",
       background: "#fff",
-      textAlign: "center"
+      textAlign: "center",
+      border: "2px solid #43e97b22"
     }}>
-      <h1 style={{ color: "#1976d2", marginBottom: 24 }}>Upload and Display Image</h1>
+      <h1 style={{ color: "#1976d2", marginBottom: 24, fontWeight: 700, fontSize: 28 }}>Upload and Display Image</h1>
+
+      <style>
+        {`
+          .custom-btn:active {
+            filter: brightness(0.85);
+          }
+        `}
+      </style>
 
       {selectedImage && (
         <div>
@@ -42,44 +53,63 @@ const Upload = () => {
             width="250px"
             src={URL.createObjectURL(selectedImage)}
             style={{
-              borderRadius: 8,
-              boxShadow: "0 1px 8px rgba(0,0,0,0.10)",
-              marginBottom: 16
+              borderRadius: 12,
+              boxShadow: "0 2px 12px rgba(67,233,123,0.10)",
+              marginBottom: 16,
+              border: "2px solid #43e97b55"
             }}
           />
-          <div style={{ display: "flex", justifyContent: "center", gap: 12, marginTop: 12 }}>
+          <div style={{ display: "flex", justifyContent: "center", gap: 16, marginTop: 16 }}>
             <button
+              className="custom-btn"
               onClick={() => {
                 setSelectedImage(null);
                 setUploaded(false);
                 setUploadedUrl(null);
               }}
               style={{
-                padding: "8px 18px",
-                borderRadius: 6,
+                padding: "10px 22px",
+                borderRadius: 8,
                 border: "none",
                 background: "#e0e0e0",
-                color: "#333",
-                cursor: "pointer"
+                color: "#1976d2",
+                fontWeight: 600,
+                cursor: "pointer",
+                transition: "background 0.2s"
               }}
             >Remove</button>
             <button
+              className="custom-btn"
               onClick={() => uploadImage(selectedImage)}
               style={{
-                padding: "8px 18px",
-                borderRadius: 6,
+                padding: "10px 22px",
+                borderRadius: 8,
                 border: "none",
-                background: "#1976d2",
+                background: "linear-gradient(90deg, #1976d2 0%, #43e97b 100%)",
                 color: "#fff",
-                cursor: "pointer"
+                fontWeight: 600,
+                cursor: "pointer",
+                boxShadow: "0 2px 8px rgba(67,233,123,0.10)",
+                transition: "background 0.2s"
               }}
             >Upload</button>
           </div>
         </div>
       )}
-      {uploaded &&  (
+      {uploaded && uploadedUrl && (
         <div>
-          <h1 style={{ color: "#4caf50", marginTop: 16 }}>Image Uploaded Successfully!</h1>
+          <h2 style={{ color: "#43e97b", marginTop: 24, fontWeight: 700 }}>Image Uploaded Successfully!</h2>
+          <img
+            src={uploadedUrl}
+            alt="Uploaded"
+            width="250px"
+            style={{
+              borderRadius: 12,
+              boxShadow: "0 2px 12px rgba(67,233,123,0.10)",
+              marginTop: 16,
+              border: "2px solid #1976d255"
+            }}
+          />
         </div>
       )}
 
@@ -87,15 +117,16 @@ const Upload = () => {
         <div style={{ marginTop: 32 }}>
           <label
             htmlFor="file-upload"
+            className="custom-btn"
             style={{
               display: "inline-block",
-              padding: "10px 24px",
-              borderRadius: 6,
-              background: "#1976d2",
+              padding: "12px 28px",
+              borderRadius: 8,
+              background: "linear-gradient(90deg, #1976d2 0%, #43e97b 100%)",
               color: "#fff",
-              fontWeight: 500,
+              fontWeight: 600,
               cursor: "pointer",
-              boxShadow: "0 1px 6px rgba(25, 118, 210, 0.08)",
+              boxShadow: "0 2px 8px rgba(25, 118, 210, 0.10)",
               transition: "background 0.2s"
             }}
           >
