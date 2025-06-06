@@ -36,14 +36,13 @@ def chatgpt():
         "status": "compost",
         "details": "This is a hot dog.",
         "where": {
-            "street_address": '1290 Parkmoor Ave'
-            "city": "San Jose"
+            "street_address": '1290 Parkmoor Ave',
+            "city": "San Jose",
             "zip": 95126,
             "state": "CA",
             "name": "BASIS Independent Silicon Valley"
         }
-    }
-)
+    })
 
 if __name__ == '__main__':
     app.run(debug=True)
