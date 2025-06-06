@@ -1,7 +1,8 @@
-from flask import Flask, jsonify, request
+import os
+from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS
 
-from .AI import main, apikeys
+#xfrom .AI import main, apikeys
 
 
 image = None
@@ -29,13 +30,15 @@ def upload_image():
         print("No file selected for upload.")
         return jsonify({"error": "No selected file"}), 400
     else:
-        image = file.read()
-        print("Image received:", len(image), "bytes")
-        # Here you would typically process the image with your AI model
+        image = file
+        print(f"File selected for upload: {file.filename}")
     
-    # Here you would typically save the file to a directory or process it
-    # For this example, we will just return a success message
-    return jsonify({"message": "File uploaded successfully", "filename": file.filename}), 200
+    # Return the URL to access the uploaded image
+    return jsonify({
+        "message": "File uploaded successfully",
+        "filename": file.filename,
+        "url": f"/api/uploads/{file.filename}"
+    }), 200
 
 
 @app.route('/api/chatgpt', methods=['GET'])
@@ -52,5 +55,5 @@ def chatgpt():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=5050)
 

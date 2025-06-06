@@ -1,33 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 
 const Upload = () => {
-    // Define a state variable to store the selected image
   const [selectedImage, setSelectedImage] = useState(null);
   const [uploaded, setUploaded] = useState(false);
+  const [uploadedUrl, setUploadedUrl] = useState(null);
 
   const uploadImage = async (image) => {
-    // Function to handle image upload]
     const formData = new FormData();
     formData.append('image', image);
 
     try {
-      // Make a POST request to the Flask backend to upload the image
-      const response = await axios.post('http://localhost:5000/api/image/upload', formData, {
+      const response = await axios.post('http://127.0.0.1:5050/api/image/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
-
-        setUploaded(true);
+      setUploaded(true);
       console.log('Image uploaded successfully:', response.data);
-    }
-    catch (error) {
+    } catch (error) {
       console.error('Error uploading image:', error);
     }
   };
 
-  // Return the JSX for rendering
   return (
     <div style={{
       maxWidth: 350,
@@ -54,7 +49,11 @@ const Upload = () => {
           />
           <div style={{ display: "flex", justifyContent: "center", gap: 12, marginTop: 12 }}>
             <button
-              onClick={() => setSelectedImage(null)}
+              onClick={() => {
+                setSelectedImage(null);
+                setUploaded(false);
+                setUploadedUrl(null);
+              }}
               style={{
                 padding: "8px 18px",
                 borderRadius: 6,
@@ -78,7 +77,11 @@ const Upload = () => {
           </div>
         </div>
       )}
-        {uploaded && (<h1 style={{ color: "#4caf50", marginTop: 16 }}>Image Uploaded Successfully!</h1>)}
+      {uploaded &&  (
+        <div>
+          <h1 style={{ color: "#4caf50", marginTop: 16 }}>Image Uploaded Successfully!</h1>
+        </div>
+      )}
 
       {!selectedImage && (
         <div style={{ marginTop: 32 }}>
@@ -105,6 +108,8 @@ const Upload = () => {
               style={{ display: "none" }}
               onChange={(event) => {
                 setSelectedImage(event.target.files[0]);
+                setUploaded(false);
+                setUploadedUrl(null);
               }}
             />
           </label>
