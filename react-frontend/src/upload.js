@@ -11,13 +11,13 @@ const Upload = () => {
     formData.append('image', image);
 
     try {
-      const response = await axios.post('http://127.0.0.1:5050/api/image/upload', formData, {
+      const response = await axios.post('http://127.0.0.1:5000/api/image/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
       setUploaded(true);
-      setUploadedUrl('http://127.0.0.1:5050' + response.data.url);
+      setUploadedUrl('http://127.0.0.1:5000' + response.data.url);
       console.log('Image uploaded successfully:', response.data);
     } catch (error) {
       console.error('Error uploading image:', error);

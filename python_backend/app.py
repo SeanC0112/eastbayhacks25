@@ -4,10 +4,10 @@ import base64
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 
-from PIL import Image
+# from PIL import Image
 import io
 
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 import numpy as np
 
 # import ai.main
@@ -75,6 +75,6 @@ def chatgpt():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5050)
+    app.run(debug=True, port=5000)
     
 

@@ -9,7 +9,7 @@ const App = () => {
     const [data, setData] = useState('');
 
     useEffect(() => {
-        axios.get('http://127.0.0.1:5050/api/data')
+        axios.get('http://127.0.0.1:5000/api/data')
             .then(response => {
                 setData(response.data.message);
             })
