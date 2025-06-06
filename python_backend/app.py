@@ -63,14 +63,6 @@ def upload_image():
 @app.route('/api/chatgpt', methods=['GET'])
 def chatgpt():
     data = ast.literal_eval(ai.main.call_gpt(ai.main.generate_prompts(image)))
-    data['where'] = {
-        "street_address": '1290 Parkmoor Ave',
-        "city": "San Jose",
-        "zip": 95126,
-        "state": "CA",
-        "name": "BASIS Independent Silicon Valley"
-    }
-    print(data)
     return jsonify(data)
 
 
