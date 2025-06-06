@@ -36,18 +36,15 @@ def upload_image():
 
 @app.route('/api/chatgpt', methods=['GET'])
 def chatgpt():
-    AI.ai.call_gpt(AI)
-    return jsonify({
-        "status": "compost",
-        "details": "This is a hot dog.",
-        "where": {
-            "street_address": '1290 Parkmoor Ave',
-            "city": "San Jose",
-            "zip": 95126,
-            "state": "CA",
-            "name": "BASIS Independent Silicon Valley"
-        }
-    })
+    data = dict(ai.call_gpt(ai.prompts))
+    data['where'] = {
+        "street_address": '1290 Parkmoor Ave',
+        "city": "San Jose",
+        "zip": 95126,
+        "state": "CA",
+        "name": "BASIS Independent Silicon Valley"
+    }
+    return jsonify(data)
 
 
 if __name__ == '__main__':
