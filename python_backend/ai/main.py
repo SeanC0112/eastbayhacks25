@@ -7,7 +7,7 @@ To run, type "python AI/ai.py" into the terminal. The regular run button generat
 
 import os
 from openai import OpenAI
-from AI.apikeys import openaikey
+from apikeys import openaikey
 
 os.environ['OPENAI_API_KEY'] = os.getenv('OPENAI_API_KEY', openaikey)
 
