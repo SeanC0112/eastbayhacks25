@@ -98,7 +98,7 @@ const App = () => {
                 zIndex: 2
             }}>
                 <Upload />
-                <Map />
+                {/* <Map /> */}
             </div>
 
             {/* Bottom Wave (at exact bottom) */}
