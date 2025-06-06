@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-from .AI import ai  # Assuming ai.py is in the same directory as this script
+import AI.ai
+import AI.apikeys
 
 image = None
 
@@ -16,10 +17,14 @@ def upload_image():
     if 'file' not in request.files:
         return jsonify({"error": "No file part"}), 400
     
-    file = request.files['file']
+    file = request.form['image']
     
     if file.filename == '':
         return jsonify({"error": "No selected file"}), 400
+    else:
+        image = file.read()
+        print("Image received:", image)
+        # Here you would typically process the image with your AI model
     
     # Here you would typically save the file to a directory or process it
     # For this example, we will just return a success message
