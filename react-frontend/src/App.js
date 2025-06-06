@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Upload from './upload';
+import Map from './map';
 
 const App = () => {
     const [data, setData] = useState('');
