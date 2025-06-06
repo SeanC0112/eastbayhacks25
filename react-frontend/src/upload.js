@@ -4,9 +4,10 @@ import axios from 'axios';
 const Upload = () => {
     // Define a state variable to store the selected image
   const [selectedImage, setSelectedImage] = useState(null);
+  const [uploaded, setUploaded] = useState(false);
 
   const uploadImage = async (image) => {
-    // Function to handle image upload
+    // Function to handle image upload]
     const formData = new FormData();
     formData.append('image', image);
 
@@ -17,6 +18,8 @@ const Upload = () => {
           'Content-Type': 'multipart/form-data',
         },
       });
+
+        setUploaded(true);
       console.log('Image uploaded successfully:', response.data);
     }
     catch (error) {
@@ -75,6 +78,7 @@ const Upload = () => {
           </div>
         </div>
       )}
+        {uploaded && (<h1 style={{ color: "#4caf50", marginTop: 16 }}>Image Uploaded Successfully!</h1>)}
 
       {!selectedImage && (
         <div style={{ marginTop: 32 }}>

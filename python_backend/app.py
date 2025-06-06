@@ -1,10 +1,10 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-import AI.ai
-import AI.apikeys
+# import AI.ai
+# import AI.apikeys
 
 image = None
-
+print("Starting Python backend...")
 app = Flask(__name__)
 CORS(app)
 
@@ -14,12 +14,12 @@ def get_data():
 
 @app.route('/api/image/upload', methods=['POST'])
 def upload_image():
-    if 'file' not in request.files:
-        return jsonify({"error": "No file part"}), 400
+    print("Received request to upload image.")
     
     file = request.form['image']
     
     if file.filename == '':
+        print("No file selected for upload.")
         return jsonify({"error": "No selected file"}), 400
     else:
         image = file.read()
