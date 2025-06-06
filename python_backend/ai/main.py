@@ -13,7 +13,7 @@ os.environ['OPENAI_API_KEY'] = os.getenv('OPENAI_API_KEY', openaikey)
 
 gpt = OpenAI()
 
-system_message = """
+system_message = f"""
 Identify what the following image is and state whether it should go to landfill, recycle, compost, or hazardous other:
 https://www.fromvalerieskitchen.com/wordpress/wp-content/uploads/2022/05/Pizza-crust-078.jpg.
 If landfill, provide a list of some sustainable alternatives. If hazardous, provide a list of some specific disposal sites.
