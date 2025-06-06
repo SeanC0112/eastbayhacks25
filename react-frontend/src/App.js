@@ -103,8 +103,8 @@ const App = () => {
 
             {/* Bottom Wave (at exact bottom) */}
             <div style={{
-                position: 'fixed',
-                bottom: 0,
+                position: 'relative',
+                bottom: -20,
                 left: 0,
                 width: '100%',
                 zIndex: 0,
