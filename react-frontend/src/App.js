@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Upload from './upload';
 import Map from './map';
+import ResponseBox from './response';
 import logo from './logo.webp';
 import Wavify from 'react-wavify';
 
@@ -98,6 +99,7 @@ const App = () => {
                 zIndex: 2
             }}>
                 <Upload />
+                <ResponseBox />
                 {/* <Map /> */}
             </div>
 

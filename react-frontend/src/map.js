@@ -18,7 +18,7 @@ const shelters = [
 ];
 
 const Map = () => {
-    const [location, setLocation] = useState(null);
+    const [location, setLocation] = useState({lat: 37.77955484118413, lng: -122.39026767050531});
 
     useEffect(() => {
         if (navigator.geolocation) {
@@ -35,6 +35,7 @@ const Map = () => {
             );
         } else {
             alert('Geolocation is not supported by your browser.');
+            
         }
     }, []);
 
