@@ -2,24 +2,46 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const Upload = () => {
-    const [data, setData] = useState('');
+    // Define a state variable to store the selected image
+  const [selectedImage, setSelectedImage] = useState(null);
 
-    useEffect(() => {
-        axios.get('http://127.0.0.1:5000/api/data') // Flask
-            .then(response => {
-                setData(response.data.message);
-            })
-            .catch(error => {
-                console.error('Error fetching data:', error);
-            });
-    }, []);
+  // Return the JSX for rendering
+  return (
+    <div>
+      {/* Header */}
+      <h1>Upload and Display Image</h1>
+      <h3>using React Hooks</h3>
 
-    return (
+      {/* Conditionally render the selected image if it exists */}
+      {selectedImage && (
         <div>
-            <h1>React with Python</h1>
-            <p>{data}</p>
+          {/* Display the selected image */}
+          <img
+            alt="not found"
+            width={"250px"}
+            src={URL.createObjectURL(selectedImage)}
+          />
+          <br /> <br />
+          {/* Button to remove the selected image */}
+          
+          <button onClick={() => setSelectedImage(null)}>Remove</button>
         </div>
-    );
+      )}
+
+      <br />
+
+      {/* Input element to select an image file */}
+      <input
+        type="file"
+        name="myImage"
+        // Event handler to capture file selection and update the state
+        onChange={(event) => {
+          console.log(event.target.files[0]); // Log the selected file
+          setSelectedImage(event.target.files[0]); // Update the state with the selected file
+        }}
+      />
+    </div>
+  );
 };
 
 export default Upload;

@@ -8,5 +8,9 @@ CORS(app)
 def get_data():
     return jsonify({"message": "Hello from Python!"})
 
+@app.route('/api/image', methods=['POST'])
+def upload_image():
+    pass
+
 if __name__ == '__main__':
     app.run(debug=True)
