@@ -26,22 +26,31 @@ const Upload = () => {
 
   return (
     <div style={{
-      maxWidth: 400,
+      flex: 1,
       minWidth: 320,
+      maxWidth: 400,
       margin: "0 auto",
       padding: 32,
-      borderRadius: 18,
-      boxShadow: "0 4px 24px rgba(25,118,210,0.10)",
-      background: "#fff",
+      borderRadius: 24,
+      background: 'rgba(255,255,255,0.7)',
+      boxShadow: "0 8px 32px rgba(25,118,210,0.10)",
+      backdropFilter: "blur(8px)",
+      border: "2px solid #43e97b33",
       textAlign: "center",
-      border: "2px solid #43e97b22"
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center"
     }}>
-      <h1 style={{ color: "#1976d2", marginBottom: 24, fontWeight: 700, fontSize: 28 }}>Upload and Display Image</h1>
+      <h1 style={{ color: "#1976d2", marginBottom: 24, fontWeight: 800, fontSize: 26, letterSpacing: 1 }}>Upload Image</h1>
 
       <style>
         {`
           .custom-btn:active {
             filter: brightness(0.85);
+          }
+          .custom-btn:hover {
+            filter: brightness(0.95);
+            box-shadow: 0 4px 16px #43e97b33;
           }
         `}
       </style>
@@ -53,7 +62,7 @@ const Upload = () => {
             width="250px"
             src={URL.createObjectURL(selectedImage)}
             style={{
-              borderRadius: 12,
+              borderRadius: 16,
               boxShadow: "0 2px 12px rgba(67,233,123,0.10)",
               marginBottom: 16,
               border: "2px solid #43e97b55"

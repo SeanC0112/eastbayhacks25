@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Upload from './upload';
-import Map from './map';
 import ResponseBox from './response';
 import logo from './logo.webp';
 import Wavify from 'react-wavify';
@@ -23,12 +22,38 @@ const App = () => {
         <div
             style={{
                 minHeight: '100vh',
-                background: 'linear-gradient(135deg, #e3f2fd 0%, #b2dfdb 100%)',
+                width: '100vw',
                 fontFamily: 'Segoe UI, Arial, sans-serif',
                 position: 'relative',
-                overflowX: 'hidden'
+                overflowX: 'hidden',
+                background: 'linear-gradient(135deg, #e3f2fd 0%, #b2dfdb 100%)',
             }}
         >
+            {/* Animated Gradient Circles */}
+            <div style={{
+                position: 'fixed',
+                top: '-120px',
+                left: '-120px',
+                width: 340,
+                height: 340,
+                background: 'radial-gradient(circle at 60% 40%, #43e97b88 0%, #1976d200 80%)',
+                zIndex: 0,
+                filter: 'blur(8px)',
+                pointerEvents: 'none',
+                animation: 'float1 12s ease-in-out infinite alternate'
+            }} />
+            <div style={{
+                position: 'fixed',
+                bottom: '-100px',
+                right: '-100px',
+                width: 300,
+                height: 300,
+                background: 'radial-gradient(circle at 40% 60%, #1976d288 0%, #43e97b00 80%)',
+                zIndex: 0,
+                filter: 'blur(8px)',
+                pointerEvents: 'none',
+                animation: 'float2 14s ease-in-out infinite alternate'
+            }} />
 
             {/* Top Wave (flipped) */}
             <div style={{
@@ -65,42 +90,43 @@ const App = () => {
                 style={{
                     width: '100%',
                     background: 'transparent',
-                    padding: '10px 0 56px 0',
-                    marginBottom: 48,
+                    padding: '32px 0 40px 0',
+                    marginBottom: 24,
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
                     position: 'relative',
-                    zIndex: 1
+                    zIndex: 2
                 }}
             >
                 <img
                     src={logo}
                     alt="Logo"
                     style={{
-                        width: 'min(440px, 90vw)',
+                        width: 'min(340px, 80vw)',
                         borderRadius: 32,
                         background: 'transparent',
                         padding: 0,
-                        objectFit: 'contain'
+                        objectFit: 'contain',
+                        boxShadow: '0 8px 32px rgba(25,118,210,0.10)'
                     }}
                 />
             </div>
 
-            {/* Main Content */}
+            {/* Main Content: Upload & ResponseBox side by side */}
             <div style={{
                 maxWidth: 900,
                 margin: '0 auto',
                 display: 'flex',
-                gap: 48,
+                gap: 32,
                 flexWrap: 'wrap',
                 justifyContent: 'center',
+                alignItems: 'stretch',
                 position: 'relative',
-                zIndex: 2
+                zIndex: 3
             }}>
                 <Upload />
                 <ResponseBox />
-                {/* <Map /> */}
             </div>
 
             {/* Bottom Wave (at exact bottom) */}
@@ -109,7 +135,7 @@ const App = () => {
                 bottom: -20,
                 left: 0,
                 width: '100%',
-                zIndex: 0,
+                zIndex: 1,
                 pointerEvents: 'none'
             }}>
                 <Wavify
@@ -131,6 +157,20 @@ const App = () => {
                     </defs>
                 </Wavify>
             </div>
+
+            {/* Keyframes for floating circles */}
+            <style>
+                {`
+                @keyframes float1 {
+                    0% { transform: translateY(0) scale(1);}
+                    100% { transform: translateY(40px) scale(1.08);}
+                }
+                @keyframes float2 {
+                    0% { transform: translateY(0) scale(1);}
+                    100% { transform: translateY(-30px) scale(1.04);}
+                }
+                `}
+            </style>
         </div>
     );
 };
