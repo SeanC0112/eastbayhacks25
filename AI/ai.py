@@ -13,15 +13,15 @@ os.environ['OPENAI_API_KEY'] = os.getenv('OPENAI_API_KEY', openaikey)
 
 gpt = OpenAI()
 
-system_message = "Concisely state what the following image is and whether it should go to landfill, recycle, compost, or specific hazardous other: https://energyeducation.ca/wiki/images/thumb/7/74/Batterydura.jpg/1200px-Batterydura.jpg"
-user_prompt = "You are part of a waste sustainability app that analyzes photos."
+system_message = "Identify what the following image is and state whether it should go to landfill, recycle, compost, or hazardous other: https://www.fromvalerieskitchen.com/wordpress/wp-content/uploads/2022/05/Pizza-crust-078.jpg. If landfill, provide a list of some sustainable alternatives. If hazardous, provide a list of some specific disposal sites."
+user_prompt = "You are part of a waste sustainability app that analyzes photos. Be concise and precise; stick to brief, single-word labels when possible. Respon in json format."
 
 prompts = [
     {"role": "system", "content": system_message},
     {"role": "user", "content": user_prompt}
   ]
 
-temp = 0.1
+temp = 0.7
 
 def call_gpt(promptsss):
     completion = gpt.chat.completions.create(
