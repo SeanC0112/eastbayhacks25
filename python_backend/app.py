@@ -5,7 +5,7 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 
 import io
-
+import PIL.Image
 import numpy as np
 
 import ai.main
@@ -49,7 +49,8 @@ def upload_image():
         print("No file selected for upload.")
         return jsonify({"error": "No selected file"}), 400
     else:
-        image = file
+        image = PIL.Image.open(io.BytesIO(file.read()))
+        image.show()
         print(f"File selected for upload: {file.filename}")
         image = base64.b64encode(image.read()).decode('utf-8')  
     # Return the URL to access the uploaded image

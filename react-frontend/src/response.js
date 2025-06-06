@@ -5,6 +5,7 @@ const ResponseBox = () => {
     const [data, setData] = useState(null);
 
     const chatGpt = () => {
+        if (data) return; // Prevent multiple calls if data is already set
         axios.get('http://127.0.0.1:5000/api/chatgpt')
             .then(response => {
                 setData(response.data);
