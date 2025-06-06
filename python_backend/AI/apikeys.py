@@ -1,1 +1,0 @@
-openaikey = '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'
