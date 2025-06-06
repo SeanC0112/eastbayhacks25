@@ -20,7 +20,15 @@ def upload_image():
     
     # Here you would typically save the file to a directory or process it
     # For this example, we will just return a success message
-    return jsonify({"message": "File uploaded successfully", "filename": file.filename}), 200
+    return jsonify({"message": "File uploaded successfully", "filename": file.filename}), 200@app.route('/api/chatgpt', methods=['GET'])
+
+def chatgpt():
+    return jsonify({
+        "can_be_recycled": "yes",
+        "details": "This is a hot dog.",
+        "where": "1290 Parkmoor Ave, San Jose, CA 95126",
+    }
+)
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -26,42 +26,86 @@ const Upload = () => {
 
   // Return the JSX for rendering
   return (
-    <div>
-      {/* Header */}
-      <h1>Upload and Display Image</h1>
+    <div style={{
+      maxWidth: 350,
+      margin: "40px auto",
+      padding: 24,
+      borderRadius: 12,
+      boxShadow: "0 2px 16px rgba(0,0,0,0.08)",
+      background: "#fff",
+      textAlign: "center"
+    }}>
+      <h1 style={{ color: "#1976d2", marginBottom: 24 }}>Upload and Display Image</h1>
 
-      {/* Conditionally render the selected image if it exists */}
       {selectedImage && (
         <div>
-          {/* Display the selected image */}
           <img
             alt="not found"
-            width={"250px"}
+            width="250px"
             src={URL.createObjectURL(selectedImage)}
+            style={{
+              borderRadius: 8,
+              boxShadow: "0 1px 8px rgba(0,0,0,0.10)",
+              marginBottom: 16
+            }}
           />
-          <br /> <br />
-          {/* Button to remove the selected image */}
-
-          <button onClick={() => setSelectedImage(null)}>Remove</button>
-          <button
-            onClick={() => {
-              uploadImage(selectedImage); // Call the upload function with the selected image
-            }}>Upload</button>
+          <div style={{ display: "flex", justifyContent: "center", gap: 12, marginTop: 12 }}>
+            <button
+              onClick={() => setSelectedImage(null)}
+              style={{
+                padding: "8px 18px",
+                borderRadius: 6,
+                border: "none",
+                background: "#e0e0e0",
+                color: "#333",
+                cursor: "pointer"
+              }}
+            >Remove</button>
+            <button
+              onClick={() => uploadImage(selectedImage)}
+              style={{
+                padding: "8px 18px",
+                borderRadius: 6,
+                border: "none",
+                background: "#1976d2",
+                color: "#fff",
+                cursor: "pointer"
+              }}
+            >Upload</button>
+          </div>
         </div>
       )}
 
-      <br />
-
-      {/* Input element to select an image file */}
-      {!selectedImage && (<input
-        type="file"
-        name="myImage"
-        // Event handler to capture file selection and update the state
-        onChange={(event) => {
-          console.log(event.target.files[0]); // Log the selected file
-          setSelectedImage(event.target.files[0]); // Update the state with the selected file
-        }}
-      />)}
+      {!selectedImage && (
+        <div style={{ marginTop: 32 }}>
+          <label
+            htmlFor="file-upload"
+            style={{
+              display: "inline-block",
+              padding: "10px 24px",
+              borderRadius: 6,
+              background: "#1976d2",
+              color: "#fff",
+              fontWeight: 500,
+              cursor: "pointer",
+              boxShadow: "0 1px 6px rgba(25, 118, 210, 0.08)",
+              transition: "background 0.2s"
+            }}
+          >
+            Choose Image
+            <input
+              id="file-upload"
+              type="file"
+              name="myImage"
+              accept="image/*"
+              style={{ display: "none" }}
+              onChange={(event) => {
+                setSelectedImage(event.target.files[0]);
+              }}
+            />
+          </label>
+        </div>
+      )}
     </div>
   );
 };
