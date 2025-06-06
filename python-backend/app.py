@@ -30,7 +30,12 @@ def chatgpt():
     return jsonify({
         "can_be_recycled": "yes",
         "details": "This is a hot dog.",
-        "where": "1290 Parkmoor Ave, San Jose, CA 95126",
+        "where": {
+            "street_address": '1290 Parkmoor Ave'
+            "city": "San Jose"
+            "zip": 95126,
+            "state": "CA",
+        }
     }
 )
 
