@@ -1,12 +1,13 @@
 import ast
+import base64
 
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 
-from PIL import Image
+# from PIL import Image
 import io
 
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 import numpy as np
 
 # import ai.main
@@ -25,6 +26,7 @@ def get_data():
 
 @app.route('/api/image/upload', methods=['POST'])
 def upload_image():
+    global image
     print("Received request to upload image.")
     
     if 'image' not in request.files:
@@ -47,6 +49,9 @@ def upload_image():
         # Optionally, show the image (will open a window on the server)
         # image.show()
 
+        image = file
+        print(f"File selected for upload: {file.filename}")
+        image = base64.b64encode(image.read()).decode('utf-8')  
     # Return the URL to access the uploaded image
     return jsonify({
         "message": "File uploaded successfully",
@@ -57,7 +62,7 @@ def upload_image():
 
 @app.route('/api/chatgpt', methods=['GET'])
 def chatgpt():
-    data = ast.literal_eval(ai.main.call_gpt(ai.main.prompts))
+    data = ast.literal_eval(ai.main.call_gpt(ai.main.generate_prompts(image)))
     data['where'] = {
         "street_address": '1290 Parkmoor Ave',
         "city": "San Jose",
@@ -65,10 +70,11 @@ def chatgpt():
         "state": "CA",
         "name": "BASIS Independent Silicon Valley"
     }
+    print(data)
     return jsonify(data)
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5050)
+    app.run(debug=True, port=5000)
     
 
