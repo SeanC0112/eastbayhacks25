@@ -9,4 +9,3 @@ This is an app that scans items and tells how sustainable they are.
 - It Maybe gives stats on the average amount of energy, carbon, etc. in each
 - It Maybe gives a diagram of user’s sustainable material use over time
 
-
