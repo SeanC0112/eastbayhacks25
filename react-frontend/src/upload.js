@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Upload from './upload';
 
-const App = () => {
+const Upload = () => {
     const [data, setData] = useState('');
 
     useEffect(() => {
@@ -23,4 +22,4 @@ const App = () => {
     );
 };
 
-export default App;
+export default Upload;
