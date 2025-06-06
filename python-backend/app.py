@@ -8,9 +8,19 @@ CORS(app)
 def get_data():
     return jsonify({"message": "Hello from Python!"})
 
-@app.route('/api/image', methods=['POST'])
+@app.route('/api/image/upload', methods=['POST'])
 def upload_image():
-    pass
+    if 'file' not in request.files:
+        return jsonify({"error": "No file part"}), 400
+    
+    file = request.files['file']
+    
+    if file.filename == '':
+        return jsonify({"error": "No selected file"}), 400
+    
+    # Here you would typically save the file to a directory or process it
+    # For this example, we will just return a success message
+    return jsonify({"message": "File uploaded successfully", "filename": file.filename}), 200
 
 if __name__ == '__main__':
     app.run(debug=True)
