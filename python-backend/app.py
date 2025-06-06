@@ -22,6 +22,7 @@ def upload_image():
     # For this example, we will just return a success message
     return jsonify({"message": "File uploaded successfully", "filename": file.filename}), 200@app.route('/api/chatgpt', methods=['GET'])
 
+@app.route('/api/chatgpt', methods=['GET'])
 def chatgpt():
     return jsonify({
         "can_be_recycled": "yes",
