@@ -13,7 +13,7 @@ const Upload = () => {
 
     try {
       // Make a POST request to the Flask backend to upload the image
-      const response = await axios.post('http://localhost:5000/image/upload', formData, {
+      const response = await axios.post('http://localhost:5000/api/image/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

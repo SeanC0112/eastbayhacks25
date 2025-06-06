@@ -19,14 +19,18 @@ def get_data():
 def upload_image():
     print("Received request to upload image.")
     
-    file = request.form['image']
+    if 'image' not in request.files:
+        print("No file part in the request.")
+        return jsonify({"error": "No file part"}), 400
+
+    file = request.files['image']
     
     if file.filename == '':
         print("No file selected for upload.")
         return jsonify({"error": "No selected file"}), 400
     else:
         image = file.read()
-        print("Image received:", image)
+        print("Image received:", len(image), "bytes")
         # Here you would typically process the image with your AI model
     
     # Here you would typically save the file to a directory or process it
