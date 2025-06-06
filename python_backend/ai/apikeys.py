@@ -1,0 +1,1 @@
+openaikey = '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'
