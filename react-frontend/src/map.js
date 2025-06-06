@@ -163,7 +163,6 @@ const shelters = [
 
 const Map = () => {
     const [location, setLocation] = useState(null);
-    const [hospitals, setHospitals] = useState([{name: "", latitude: 0, longitude: 0}]);
 
     useEffect(() => {
         if (navigator.geolocation) {
@@ -173,45 +172,13 @@ const Map = () => {
                         lat: position.coords.latitude,
                         lng: position.coords.longitude
                     });
-                    axios.get('http://127.0.0.1:5000/api/geocode', {
-                        params: { lat: position.coords.latitude, long: position.coords.longitude }
-                    })
-                        .then(response => {
-                            // If backend returns array of objects [{name, latitude, longitude}, ...]
-                            for (let i = 0; i < response.data.hospitals.length; i++) {
-                                setHospitals(...hospitals, {name: response.data.hospitals, latitude: response.data.latitude, longitude: response.data.longitude});
-                            }
-                        })
-                        .catch(error => {
-                            console.error('Error fetching hospital data:', error);
-                        });
                 },
                 () => {
                     alert('Unable to retrieve your location.');
-                    axios.get('http://127.0.0.1:5000/api/geocode')
-                        .then(response => {
-                            // If backend returns array of objects [{name, latitude, longitude}, ...]
-                            for (let i = 0; i < response.data.hospitals.length; i++) {
-                                setHospitals(...hospitals, {name: response.data.hospitals, latitude: response.data.latitude, longitude: response.data.longitude});
-                            }
-                        })
-                        .catch(error => {
-                            console.error('Error fetching hospital data:', error);
-                        });
                 }
             );
         } else {
             alert('Geolocation is not supported by your browser.');
-            axios.get('http://127.0.0.1:5000/api/geocode')
-                        .then(response => {
-                            // If backend returns array of objects [{name, latitude, longitude}, ...]
-                            for (let i = 0; i < response.data.hospitals.length; i++) {
-                                setHospitals(...hospitals, {name: response.data.hospitals, latitude: response.data.latitude, longitude: response.data.longitude});
-                            }
-                        })
-                        .catch(error => {
-                            console.error('Error fetching hospital data:', error);
-                        });
         }
     }, []);
 
@@ -250,13 +217,6 @@ const Map = () => {
                         </Popup>
                     </Marker>
                 )}
-                {hospitals.map((hospital, idx) => (
-                    <Marker key={`hospital-${idx}`} position={[hospital.latitude, hospital.longitude]}>
-                        <Popup>
-                            <b>{hospital.name}</b>
-                        </Popup>
-                    </Marker>
-                ))}
                 {/* Remove shelters section below if you don't want static shelters */}
                 {shelters.map((shelter, idx) => (
                     <Marker key={`shelter-${idx}`} position={[shelter.lat, shelter.lng]}>

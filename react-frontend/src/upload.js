@@ -96,20 +96,9 @@ const Upload = () => {
           </div>
         </div>
       )}
-      {uploaded && uploadedUrl && (
+      {uploaded && (
         <div>
           <h2 style={{ color: "#43e97b", marginTop: 24, fontWeight: 700 }}>Image Uploaded Successfully!</h2>
-          <img
-            src={uploadedUrl}
-            alt="Uploaded"
-            width="250px"
-            style={{
-              borderRadius: 12,
-              boxShadow: "0 2px 12px rgba(67,233,123,0.10)",
-              marginTop: 16,
-              border: "2px solid #1976d255"
-            }}
-          />
         </div>
       )}
 
