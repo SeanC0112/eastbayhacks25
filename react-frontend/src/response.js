@@ -7,7 +7,7 @@ const ResponseBox = () => {
     useEffect(() => {
         axios.get('http://127.0.0.1:5000/api/chatgpt')
             .then(response => {
-                setData(response.data.message);
+                setData(response.data);
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
