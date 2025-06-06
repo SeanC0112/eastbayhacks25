@@ -4,14 +4,12 @@ import base64
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 
-# from PIL import Image
 import io
 
-# import matplotlib.pyplot as plt
 import numpy as np
 
-# import ai.main
-# import ai.apikeys
+import ai.main
+import ai.apikeys
 
 image = None
 print("Starting Python backend...")
@@ -40,15 +38,6 @@ def upload_image():
         print("No file selected for upload.")
         return jsonify({"error": "No selected file"}), 400
     else:
-        # Read the image and print its format and size
-        image_bytes = file.read()
-        image = Image.open(io.BytesIO(image_bytes))
-        image.show()  # This will display the image in a window (if running locally)
-        print(f"Image format: {image.format}")
-        print(f"Image size: {image.size}")
-        # Optionally, show the image (will open a window on the server)
-        # image.show()
-
         image = file
         print(f"File selected for upload: {file.filename}")
         image = base64.b64encode(image.read()).decode('utf-8')  
