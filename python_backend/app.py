@@ -4,13 +4,10 @@ import base64
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 
-import io
-import PIL.Image
-import numpy as np
-
 import ai.main
 import ai.apikeys
 
+data = None
 image = None
 print("Starting Python backend...")
 app = Flask(__name__)
@@ -24,7 +21,8 @@ def get_data():
 @app.route('/api/chatgpt/data', methods=['GET'])
 def check_image():
     global image
-    return jsonify(image)
+    global data
+    return jsonify(data)
 
 
 @app.route('/api/image/upload', methods=['POST'])
@@ -56,7 +54,9 @@ def upload_image():
 @app.route('/api/chatgpt', methods=['GET'])
 def chatgpt():
     global image
-    data = ast.literal_eval(ai.main.call_gpt(ai.main.generate_prompts(image)))
+    global data
+    string = ai.main.call_gpt(ai.main.generate_prompts(image))
+    data = ast.literal_eval(string)
     return jsonify(data)
 
 
