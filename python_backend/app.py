@@ -20,7 +20,6 @@ def get_data():
 
 @app.route('/api/chatgpt/data', methods=['GET'])
 def check_image():
-    global image
     global data
     return jsonify(data)
 
