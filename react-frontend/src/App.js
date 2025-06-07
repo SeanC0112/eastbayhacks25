@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Upload from './upload';
 import ResponseBox from './response';
+import Map from './map';
 import logo from './logo.webp';
 import Wavify from 'react-wavify';
 
@@ -113,9 +114,9 @@ const App = () => {
                 />
             </div>
 
-            {/* Main Content: Upload & ResponseBox side by side */}
+            {/* Main Content: Upload, ResponseBox, Map side by side */}
             <div style={{
-                maxWidth: 900,
+                maxWidth: 1400,
                 margin: '0 auto',
                 display: 'flex',
                 gap: 32,
@@ -127,12 +128,29 @@ const App = () => {
             }}>
                 <Upload />
                 <ResponseBox />
+                <div style={{
+                    flex: 1,
+                    minWidth: 380,
+                    maxWidth: 600,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    background: 'rgba(255,255,255,0.8)',
+                    borderRadius: 24,
+                    boxShadow: "0 8px 32px rgba(25,118,210,0.10)",
+                    border: "2px solid #1976d233",
+                    padding: 24,
+                    margin: "0 auto"
+                }}>
+                    <Map />
+                </div>
             </div>
 
             {/* Bottom Wave (at exact bottom) */}
             <div style={{
                 position: 'fixed',
-                bottom: -20,
+                bottom: 0,
                 left: 0,
                 width: '100%',
                 zIndex: 1,

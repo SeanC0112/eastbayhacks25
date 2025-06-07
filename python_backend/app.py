@@ -8,8 +8,7 @@ import io
 import PIL.Image
 import numpy as np
 
-import ai.main
-import ai.apikeys
+# import ai.main
 
 image = None
 data = None
