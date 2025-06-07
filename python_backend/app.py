@@ -4,15 +4,10 @@ import base64
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 
-import io
-import PIL.Image
-import numpy as np
-
 import ai.main
 import ai.apikeys
 
 image = None
-data = None
 print("Starting Python backend...")
 app = Flask(__name__)
 CORS(app)
@@ -24,8 +19,8 @@ def get_data():
 
 @app.route('/api/chatgpt/data', methods=['GET'])
 def check_image():
-    global data
-    return jsonify(data)
+    global image
+    return jsonify(image)
 
 
 @app.route('/api/image/upload', methods=['POST'])
@@ -44,10 +39,8 @@ def upload_image():
         print("No file selected for upload.")
         return jsonify({"error": "No selected file"}), 400
     else:
-        image = PIL.Image.open(io.BytesIO(file.read()))
-        image.show()
         print(f"File selected for upload: {file.filename}")
-        image = base64.b64encode(image.read()).decode('utf-8')  
+        image = base64.b64encode(file.read()).decode()  
     # Return the URL to access the uploaded image
     return jsonify({
         "message": "File uploaded successfully",
@@ -58,7 +51,7 @@ def upload_image():
 
 @app.route('/api/chatgpt', methods=['GET'])
 def chatgpt():
-    global data
+    global image
     data = ast.literal_eval(ai.main.call_gpt(ai.main.generate_prompts(image)))
     return jsonify(data)
 
