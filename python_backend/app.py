@@ -12,6 +12,7 @@ import ai.main
 import ai.apikeys
 
 image = None
+data = None
 print("Starting Python backend...")
 app = Flask(__name__)
 CORS(app)
@@ -21,16 +22,10 @@ CORS(app)
 def get_data():
     return jsonify({"message": "Hello from Python!"})
 
-@app.route('/api/image/check', methods=['GET'])
+@app.route('/api/chatgpt/data', methods=['GET'])
 def check_image():
-    global image
-    print("Received request to check image.")
-    
-    if image is None:
-        print("No image uploaded yet.")
-        return jsonify({"updated": "false"}), 400
-    else:
-        return jsonify({"updated": "true"}), 200
+    global data
+    return jsonify(data)
 
 
 @app.route('/api/image/upload', methods=['POST'])
@@ -63,6 +58,7 @@ def upload_image():
 
 @app.route('/api/chatgpt', methods=['GET'])
 def chatgpt():
+    global data
     data = ast.literal_eval(ai.main.call_gpt(ai.main.generate_prompts(image)))
     return jsonify(data)
 

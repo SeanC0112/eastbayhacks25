@@ -19,6 +19,7 @@ const Upload = () => {
       setUploaded(true);
       setUploadedUrl('http://127.0.0.1:5000' + response.data.url);
       console.log('Image uploaded successfully:', response.data);
+      axios.get('http://127.0.0.1:5000/api/chatgpt')
     } catch (error) {
       console.error('Error uploading image:', error);
     }
