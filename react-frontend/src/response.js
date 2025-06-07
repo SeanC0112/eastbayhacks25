@@ -3,22 +3,10 @@ import axios from 'axios';
 
 const ResponseBox = () => {
     const [data, setData] = useState(null);
-
-    const chatGpt = () => {
-        axios.get('http://127.0.0.1:5000/api/chatgpt')
-            .then(response => {
-                setData(response.data);
-            })
-            .catch(error => {
-                console.error('Error fetching data:', error);
-            });
-    };
     const checkForUpdates = async () => {
         try {
-            const response = await axios.get('http://127.0.0.1:5000/api/image/check');
-            if (response.data.updated == "true") {
-                chatGpt();
-            }
+            const response = await axios.get('http://127.0.0.1:5000/api/chatgpt/data');
+            setData(response.data);
 
         } catch (error) {
             console.error('Error checking for updates:', error);
@@ -60,7 +48,7 @@ const ResponseBox = () => {
                 {data && (
                     <div>
                         <h1 style={{ color: "#1976d2", marginBottom: 16, fontWeight: 700, fontSize: 20 }}>Item: {data.item}</h1>
-                        h1
+                        <h1 style={{ color: "#1976d2", marginBottom: 16, fontWeight: 700, fontSize: 20 }}>Disposal: {data.disposal}</h1>
                         <p style={{ marginBottom: 16 }}>{data.details}</p>
                         
                     </div>
