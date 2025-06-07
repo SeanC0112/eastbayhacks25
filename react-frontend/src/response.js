@@ -15,7 +15,7 @@ const ResponseBox = () => {
     useEffect(() => {
         const interval = setInterval(() => {
             checkForUpdates();
-        }, 5000); // Check every 5 seconds
+        }, 1000); // Check every 5 seconds
 
         return () => clearInterval(interval); // Cleanup on unmount
     }, []);
@@ -23,26 +23,33 @@ const ResponseBox = () => {
     return (
         <div
             style={{
-                maxWidth: 400,
+                flex: 1,
                 minWidth: 320,
+                maxWidth: 400,
                 margin: "0 auto",
                 padding: 32,
-                borderRadius: 18,
-                boxShadow: "0 4px 24px rgba(25,118,210,0.10)",
-                background: "#fff",
+                borderRadius: 24,
+                background: 'rgba(255,255,255,0.7)',
+                boxShadow: "0 8px 32px rgba(25,118,210,0.10)",
+                backdropFilter: "blur(8px)",
+                border: "2px solid #43e97b33",
                 textAlign: "center",
-                border: "2px solid #43e97b22",
-                fontFamily: 'Segoe UI, Arial, sans-serif'
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center"
             }}
         >
             <h1 style={{ color: "#1976d2", marginBottom: 24, fontWeight: 700, fontSize: 24 }}>
                 ChatGPT Response
             </h1>
             <div style={{
-                color: data ? "#222" : "#43e97b",
+                color: data ? "#222" : "#1976d2",
                 fontWeight: 500,
                 fontSize: 18,
-                minHeight: 40
+                minHeight: 60,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center"
             }}>
                 {!data && (
                     <div style={{ width: "100%" }}>
